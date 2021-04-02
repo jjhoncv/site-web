@@ -37,10 +37,10 @@ db:
 		-u 1000:1000 \
 		-v ${PWD}/mysql/data:/var/lib/mysql \
 		-p 3306:3306 \
-		--env-file ./app/.env.local \
+		--env-file ./app/.env \
 		mysql:5.6.40		
 
-start:
+start.site:
 	$(call create_network)
 	$(call network_ip)
 	@docker run \
@@ -48,7 +48,7 @@ start:
 		-it \
 		--rm \
 		--name siteweb \
-		--env-file ./app/.env.local \
+		--env-file ./app/.env \
 		-u 1000:1000 \
 		-p 3000:3000 \
 		--net=${NETWORK_NAME} \
@@ -56,7 +56,9 @@ start:
 		-w /app \
 		node:11-slim \
 		npm start
+	@docker container logs siteweb -f --tail=10
 
+start.admin:
 	$(call create_network)
 	$(call network_ip)
 	@docker run \
@@ -64,7 +66,7 @@ start:
 		-it \
 		--rm \
 		--name siteweb-admin \
-		--env-file ./app/.env.local \
+		--env-file ./app/.env \
 		-u 1000:1000 \
 		-p 4000:4000 \
 		--net=${NETWORK_NAME} \
@@ -72,8 +74,8 @@ start:
 		-w /app \
 		node:11-slim \
 		npm start
+	@docker container logs siteweb-admin -f --tail=10
 
-	@make logs
 
 build:
 	@docker run \

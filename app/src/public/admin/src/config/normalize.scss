@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #4e4e4e;
+}
+input[type="text"],
+input[type="password"],
+textarea {
+  outline: none;
+  font-size: 16px;
+  &:focus,
+  &:-webkit-autofill::first-line {
+    font-size: 16px;
+  }
+}
+
+input[type="submit"],
+button {
+  outline: none;
+}
+
+.content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  @media (max-width: 1440px) {
+    padding: 0 15px;
+  }
+}
+
+a,
+a:active,
+a:hover,
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}

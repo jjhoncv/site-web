@@ -1,0 +1,56 @@
+.float-message {
+  position: absolute;
+  top: calc(50% - 100px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  width: 500px;
+  height: 200px;
+}
+
+.box-float-close {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  &:before, &:after {
+    content: "";
+    width: 17px;
+    border-top: 2px solid #4e4e53;
+    position: absolute;
+    left: 5px;
+    top: 13px;
+  }
+  &:before {    
+    transform: rotate(45deg);    
+  }
+  &:after{
+    transform: rotate(-45deg);  
+  }
+}
+
+.float-message-head {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #ddd;
+  h6 {
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+.float-message-body {
+  padding: 20px 0;
+  font-size: 16px;
+}
+.float-message-foot {
+  display: flex;
+  justify-content: space-around;
+  &.left {
+    justify-content: space-between;
+    background: #fff;
+    padding-top: 20px;
+    max-width: 210px;
+  }
+}

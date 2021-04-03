@@ -1,7 +1,7 @@
 {
   "name": "dashboard",
   "version": "1.0.0",
-  "description": "Project dashboard",
+  "description": "site-web admin",
   "scripts": {
     "start": "webpack serve --config ./config/webpack/config.dev.js --host 0.0.0.0 --port 4000 --disable-host-check",
     "build": "rm -fr ./dist && NODE_ENV=build webpack --config ./config/webpack/config.prod.js"

@@ -3,6 +3,7 @@ import cors from "cors";
 import { siteRoutes, apiRoutes, adminRoutes } from "./routes";
 import "./utils/config";
 import path from "path";
+import { testConnection } from "./utils/connection";
 
 const App = () => {
   const app: Application = express();
@@ -31,6 +32,7 @@ const App = () => {
     console.log(
       "server on " + process.env.SERVER_HOST + ":" + process.env.SERVER_PORT
     );
+    testConnection()
   };
 
   return {

@@ -1,0 +1,52 @@
+version: '3'
+services:
+  siteweb:
+    env_file: 
+      - ./app/.env.local
+    build:
+      context: docker/node
+    container_name: siteweb
+    restart: unless-stopped
+    volumes:
+      - ./app:/app
+      - ./docker/node/wait-for-it.sh:/wait-for-it.sh
+    depends_on:
+      - bd
+    restart: on-failure:10
+    ports:
+      - "3000:3000"
+    entrypoint: /wait-for-it.sh -t 5 mysql:3306 -- 
+    command: bash -c "npm install && npm start"
+  bd:
+    env_file: 
+      - ./app/.env.local
+    image: $MYSQL_IMAGE
+    container_name: siteweb-mysql
+    restart: unless-stopped   
+    ports:
+      - '3306:3306'
+    volumes: 
+      - ./docker/mysql/data:/var/lib/mysql
+
+  admin:
+    restart: on-failure:10
+    env_file: 
+      - ./app/.env.local
+    build:
+      context: docker/node
+    container_name: siteweb-admin
+    restart: unless-stopped   
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./app/src/public/admin:/app
+      - ./docker/node/wait-for-it.sh:/wait-for-it.sh
+    depends_on:
+      - bd
+    entrypoint: /wait-for-it.sh -t 5 mysql:3306 --      
+    command: bash -c "npm install && npm start"
+
+
+networks:
+  siteweb-network:
+
